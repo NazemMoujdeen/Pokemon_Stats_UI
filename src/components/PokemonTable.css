@@ -1,0 +1,49 @@
+.table-container {
+  margin-top: 2rem;
+  width: 100%;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: #fafafa;
+  position: relative;
+  max-height: 75vh; /* 75% of the viewport/screen height */
+  overflow-y: auto; /* Allow vertical scrolling within this box */
+  overflow-x: auto; /* Keep horizontal scrolling for small screens */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+/*made so the rows scroll and the table headers dont move for readability*/
+thead th {
+  background-color: #333; /*darker grey*/
+  color: white;
+  font-family: "Press Start 2P", system-ui;
+  font-size: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 1; /* Ensures the header stays above the table body content */
+}
+
+/*every other row is a slightly different shade for readability*/
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: lightgreen; /* highlight row on hover with a green color */
+}
+
+.pokemon-name {
+  font-weight: bold;
+  text-transform: capitalize;
+}

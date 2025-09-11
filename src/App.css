@@ -4,42 +4,35 @@
   padding: 5%;
   text-align: center;
   background-color: gray; /* This makes the content area gey */
-  color: #242424;          /* This makes any future text dark and readable */
-  border-radius: 8px;      /* This gives the white box soft corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-
+  color: black; /* Makes default text black */
+  border-radius: 8px; /* gives the box soft corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
 }
-.app-container {
-  /* No special styles needed here anymore */
-}
-
-/* --- Your Header Styles --- */
 
 .header {
+  /*styling to make the red box*/
   background-color: red;
-  /* Reduced padding and border for a tighter look */
-  padding: 8px 16px; 
+  padding: 8px 16px;
   border-radius: 8px;
   border: 3px solid #333;
 
-  /* Flexbox styles to arrange the logos and title */
+  /* flexbox styles to arrange the logos and title so the logos are either side of the title*/
   display: flex;
-  justify-content: space-between; /* Pushes items apart */
-  align-items: center;            /* Aligns them vertically in the middle */
+  justify-content: space-between; /* pushes items apart */
+  align-items: center; /* centers the items */
 }
 
+/*styling for the title text*/
 .header h1 {
   font-family: "Press Start 2P", system-ui;
   color: white;
   margin: 0;
-  /* Made the font slightly smaller */
   font-size: 1.2rem;
   text-shadow: 2px 2px #000000;
 }
 
-/* New style for the logos when they are inside the header */
+/* styling for the pokeball pngs */
 .header-logo {
-  /* Made the logos smaller */
-  width: 60px; 
+  width: 60px;
   height: auto;
 }

@@ -1,0 +1,20 @@
+.search-container {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-family: "Press Start 2P", system-ui;
+  border-radius: 8px;
+  border: 3px solid #333;
+  box-sizing: border-box; /* Ensures padding doesn't affect the width */
+  background-color: #f0f0f0;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: red;
+}
