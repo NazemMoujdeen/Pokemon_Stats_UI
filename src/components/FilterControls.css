@@ -1,0 +1,36 @@
+.filter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.type-filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-controls select,
+.legendary-button {
+  padding: 10px 15px;
+  font-family: "Press Start 2P", system-ui;
+  font-size: 0.75rem;
+  border-radius: 8px;
+  border: 3px solid #333;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  color: #333;
+}
+
+.legendary-button {
+  border-color: #ffde00; /* Yellow border for legendary */
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* This is the style for the button WHEN IT'S ACTIVE */
+.legendary-button.active {
+  background-color: #ffde00; /* Gold background */
+  color: #3b4cca; /* Blue text */
+}

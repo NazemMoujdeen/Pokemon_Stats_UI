@@ -3,13 +3,16 @@ import "./App.css";
 import pokeballLogo from "./assets/pokeballLogo.png";
 import PokemonTable from "./components/PokemonTable.jsx";
 import SearchBar from "./components/SearchBar.jsx";
-
+import FilterControls from "./components/FilterControls.jsx";
 function App() {
   // These add states to components to hold data
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [type1, setType1] = useState("any");
+  const [type2, setType2] = useState("any");
+  const [legendaryFilter, setLegendaryFilter] = useState(false);
 
   useEffect(() => {
     async function fetchAllPokemon() {
@@ -37,20 +40,29 @@ function App() {
 
   // filters the full list based on what the user types in the search bar
   const filteredPokemon = pokemonList.filter((pokemon) => {
-    if (!searchTerm) {
-      return true;
-    }
-    const searchTermLower = searchTerm.toLowerCase();
+    const searchMatch = !searchTerm
+      ? true
+      : (pokemon.name &&
+          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (pokemon.number && pokemon.number.toString().includes(searchTerm));
 
-    // check if the name exists and includes the search term.
-    const nameMatch =
-      pokemon.name && pokemon.name.toLowerCase().includes(searchTermLower);
+    // filters the list based on type selected
+    const type1Match =
+      type1 === "any" ||
+      (pokemon.type1 && pokemon.type1.toLowerCase() === type1) ||
+      (pokemon.type2 && pokemon.type2.toLowerCase() === type1);
 
-    // does the same for number
-    const numberMatch =
-      pokemon.number && pokemon.number.toString().includes(searchTermLower);
+    // does the same if a type 2 is selected
+    const type2Match =
+      type2 === "any" ||
+      (pokemon.type1 && pokemon.type1.toLowerCase() === type2) ||
+      (pokemon.type2 && pokemon.type2.toLowerCase() === type2);
 
-    return nameMatch || numberMatch;
+    // button to filter for legendary pokemon
+    const legendaryMatch = !legendaryFilter ? true : pokemon.legendary === 1;
+
+    // results are shown if all the the filters are true
+    return searchMatch && type1Match && type2Match && legendaryMatch;
   });
 
   return (
@@ -66,7 +78,14 @@ function App() {
       <div className="content-area">
         {/* the component is used to update the searchbars state */}
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
+        <FilterControls
+          type1={type1}
+          setType1={setType1}
+          type2={type2}
+          setType2={setType2}
+          legendaryFilter={legendaryFilter}
+          setLegendaryFilter={setLegendaryFilter}
+        />
         {loading && <p className="loading-message">Loading stats...</p>}
         {error && <p className="error-message">Error: {error}</p>}
 
