@@ -1,0 +1,40 @@
+.detail-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-family: "Press Start 2P", system-ui;
+  text-decoration: none;
+  color: #3b4cca;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 4px solid red;
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+}
+
+.detail-header h1 {
+  font-family: "Press Start 2P", system-ui;
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  text-align: left;
+}
+
+.stats-grid p {
+  margin: 0;
+  padding: 0.75rem;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}

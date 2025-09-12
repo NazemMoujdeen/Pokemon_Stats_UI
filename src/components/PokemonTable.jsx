@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./PokemonTable.css";
 
 const PokemonTable = ({ pokemons }) => {
@@ -31,7 +32,10 @@ const PokemonTable = ({ pokemons }) => {
           {pokemons.map((pokemon) => (
             <tr key={pokemon.number}>
               <td>{pokemon.number}</td>
-              <td className="pokemon-name">{pokemon.name}</td>
+              <td className="pokemon-name">
+                {/*adds a link that points to their details page */}
+                <Link to={`/pokemon/${pokemon.number}`}>{pokemon.name}</Link>
+              </td>
               <td>{pokemon.type1}</td>
               <td>{pokemon.type2 !== "None" ? pokemon.type2 : "-"}</td>
               <td>{pokemon.hp}</td>
