@@ -1,11 +1,13 @@
 .detail-container {
   padding: 2rem;
   font-family: Arial, sans-serif;
+  text-align: left;
 }
 
 .back-button {
-  display: inline-block;
-  margin-bottom: 2rem;
+  display: block; /* Allows margin auto to work */
+  margin: 0 auto 2rem auto; /* Centers the button horizontally */
+  width: fit-content; /* Prevents the link from taking up the full width */
   font-family: "Press Start 2P", system-ui;
   text-decoration: none;
   color: #3b4cca;
@@ -25,11 +27,41 @@
   margin: 0;
 }
 
+.detail-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.pokemon-image-container {
+  flex: 1;
+  max-width: 300px; /* Reduced the image size */
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  padding: 2rem;
+  border: 4px solid #333;
+  position: sticky;
+  top: 2rem;
+}
+
+.pokemon-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.info-column {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* This rule forces the stats into a two-column layout */
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  text-align: left;
 }
 
 .stats-grid p {
@@ -37,4 +69,120 @@
   padding: 0.75rem;
   background-color: #f0f0f0;
   border-radius: 4px;
+}
+
+/* This is the rule that centers the Pokémon's own types */
+.own-types {
+  grid-column: 1 / -1; /* Makes the types span the full width of the grid */
+  display: flex;
+  justify-content: center; /* This centers the badges horizontally */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* --- Styles for Type Matchups --- */
+.matchups-container {
+  display: grid;
+  /* This creates a single column, stacking the sections vertically */
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  text-align: left;
+}
+
+/* This rule now styles all three headings identically */
+.supereffective h3,
+.weaknesses h3,
+.immunities h3 {
+  font-family: "Press Start 2P", system-ui;
+  font-size: 1rem;
+  margin-top: 0;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+/* This rule now centers the matchup badges */
+.type-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* This is the BASE style for ALL type badges */
+.type-badge {
+  color: white;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-transform: capitalize;
+  text-align: center;
+}
+
+/* This NEW, more specific rule makes ONLY the Pokémon's own type badges bigger */
+.own-types .type-badge {
+  padding: 8px 16px;
+  font-size: 1rem;
+}
+
+/* --- Type Colors for Badges --- */
+.type-normal {
+  background-color: #a8a878;
+}
+.type-fire {
+  background-color: #f08030;
+}
+.type-water {
+  background-color: #68a0f0;
+}
+.type-grass {
+  background-color: #78c850;
+}
+.type-electric {
+  background-color: #f8d030;
+}
+.type-ice {
+  background-color: #98d8d8;
+}
+.type-fighting {
+  background-color: #c03028;
+}
+.type-poison {
+  background-color: #a040a0;
+}
+.type-ground {
+  background-color: #e0c068;
+}
+.type-flying {
+  background-color: #a890f0;
+}
+.type-psychic {
+  background-color: #f85888;
+}
+.type-bug {
+  background-color: #a8b820;
+}
+.type-rock {
+  background-color: #b8a038;
+}
+.type-ghost {
+  background-color: #705898;
+}
+.type-dragon {
+  background-color: #7038f8;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .detail-body {
+    flex-direction: column;
+  }
+  .pokemon-image-container {
+    position: static;
+    max-width: 250px;
+  }
+  /* On mobile, force stats to a single column for readability */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }

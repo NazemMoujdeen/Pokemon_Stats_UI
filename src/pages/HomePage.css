@@ -3,7 +3,7 @@
   margin: 2rem auto; /* 2rem is two times the font size of the root element*/
   padding: 5%;
   text-align: center;
-  background-color: gray; /* This makes the content area gey */
+  background-color: darkred; /* This makes the content area gey */
   color: black; /* Makes default text black */
   border-radius: 8px; /* gives the box soft corners */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
