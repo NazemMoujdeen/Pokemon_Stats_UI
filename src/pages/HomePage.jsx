@@ -15,6 +15,10 @@ function HomePage() {
   const [type1, setType1] = useState("any");
   const [type2, setType2] = useState("any");
   const [legendaryFilter, setLegendaryFilter] = useState(false);
+  const [sortConfig, setSortConfig] = useState({
+    key: "number",
+    direction: "ascending",
+  });
 
   useEffect(() => {
     getPokemon()
@@ -23,8 +27,35 @@ function HomePage() {
       .finally(() => setLoading(false));
   }, []); // The empty array ensures this runs only once
 
-  // filters the full list based on what the user types in the search bar
-  const filteredPokemon = pokemonList.filter((pokemon) => {
+  //this function deals with sorting the columns when clicked changing the column order basd on the "key" selected
+  const handleSort = (key) => {
+    let direction;
+
+    if (sortConfig.key === key) {
+      direction =
+        sortConfig.direction === "ascending" ? "descending" : "ascending";
+    } else {
+      // default to decending
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  //creates a new sorted list based on the original unsorted list using a shallow copy of the original ([...pokemonList])
+  const sortedPokemon = [...pokemonList].sort((a, b) => {
+    const valA = a[sortConfig.key];
+    const valB = b[sortConfig.key];
+    if (valA < valB) {
+      return sortConfig.direction === "ascending" ? -1 : 1;
+    }
+    if (valA > valB) {
+      return sortConfig.direction === "ascending" ? 1 : -1;
+    }
+    return 0;
+  });
+
+  // filters the full list based on what the user types in the search bar and sort value
+  const filteredPokemon = sortedPokemon.filter((pokemon) => {
     const searchMatch = !searchTerm
       ? true
       : (pokemon.name &&
@@ -74,8 +105,13 @@ function HomePage() {
         {loading && <p className="loading-message">Loading stats...</p>}
         {error && <p className="error-message">Error: {error}</p>}
 
-        {/* the new filtered list of pokemon is passed back to the table*/}
-        {!loading && !error && <PokemonTable pokemons={filteredPokemon} />}
+        {!loading && !error && (
+          <PokemonTable
+            pokemons={filteredPokemon}
+            onSort={handleSort}
+            sortConfig={sortConfig}
+          />
+        )}
       </div>
     </div>
   );

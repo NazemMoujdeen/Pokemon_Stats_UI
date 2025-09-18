@@ -47,3 +47,19 @@ tbody tr:hover {
   font-weight: bold;
   text-transform: capitalize;
 }
+
+/*styles for the sorting buttons*/
+thead th button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+thead th button:hover {
+  color: #ffde00; /* Yellow hover effect */
+}

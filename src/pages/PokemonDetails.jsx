@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-// Corrected to use the consistent function name from your service
 import { getPokemonByNum } from "../api/PokemonService.js";
-// Corrected typo in the CSS import path
 import "./PokemonDetails.css";
 
 const PokemonDetail = () => {
@@ -23,9 +21,10 @@ const PokemonDetail = () => {
   if (error) return <p className="error-message">Error: {error}</p>;
   if (!pokemon) return <p>Pokémon not found.</p>;
 
+  //gets an image of the pokemon based on its number
   const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.number}.png`;
 
-  // This logic now creates three distinct and correct matchup lists
+  // gets the dmg match ups for all the types
   const damageTypes = [
     { name: "Normal", value: pokemon.normalDmg },
     { name: "Fire", value: pokemon.fireDmg },
@@ -44,19 +43,21 @@ const PokemonDetail = () => {
     { name: "Dragon", value: pokemon.dragonDmg },
   ];
 
+  //filters the list to find what types its supereffective/weak/immune against
   const weaknesses = damageTypes
     .filter((t) => t.value >= 2)
     .sort((a, b) => b.value - a.value);
-  // Correctly filters for resistances (0.5x, 0.25x) based on your logic
+
   const supereffective = damageTypes
     .filter((t) => t.value > 0 && t.value < 1)
     .sort((a, b) => a.value - b.value);
+
   const immunities = damageTypes.filter((t) => t.value === 0);
 
   return (
     <div className="detail-container">
       <Link to="/" className="back-button">
-        ← Back to Pokédex
+        ← Back to Main Menu
       </Link>
       <div className="detail-header">
         <h1>{pokemon.name}</h1>
@@ -82,6 +83,7 @@ const PokemonDetail = () => {
                 </span>
               )}
             </div>
+            {/*lists the stats of the pokemon */}
             <p>
               <strong>HP:</strong> {pokemon.hp}
             </p>
@@ -107,6 +109,8 @@ const PokemonDetail = () => {
               <strong>Weight:</strong> {pokemon.weightKg} kg
             </p>
           </div>
+
+          {/*List the match ups for the pokemon */}
           <div className="matchups-container">
             <div className="supereffective">
               <h3>Super Effective Against</h3>

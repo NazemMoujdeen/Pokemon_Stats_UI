@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./PokemonTable.css";
 
-const PokemonTable = ({ pokemons }) => {
+const PokemonTable = ({ pokemons, onSort, sortConfig }) => {
+  const getSortIndicator = (key) => {
+    if (sortConfig.key !== key) {
+      return null; // Don't show an indicator if this column isn't being sorted
+    }
+    // Return the correct arrow based on the sort direction
+    return sortConfig.direction === "ascending" ? "▲" : "▼";
+  };
+
   if (!pokemons || pokemons.length === 0) {
     return <p>No Pokémon found.</p>;
   }
@@ -13,20 +21,70 @@ const PokemonTable = ({ pokemons }) => {
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Type 1</th>
-            <th>Type 2</th>
-            <th>HP</th>
-            <th>Attack</th>
-            <th>Defense</th>
-            <th>Special</th>
-            <th>Speed</th>
-            <th>Total</th>
-            <th>Evolutions</th>
-            <th>Legendary</th>
+            {/* Each header is now a clickable button that calls the onSort function */}
+            <th>
+              <button onClick={() => onSort("number")}>
+                # {getSortIndicator("number")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("name")}>
+                Name {getSortIndicator("name")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("type1")}>
+                Type 1 {getSortIndicator("type1")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("type2")}>
+                Type 2 {getSortIndicator("type2")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("hp")}>
+                HP {getSortIndicator("hp")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("attack")}>
+                Attack {getSortIndicator("attack")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("defense")}>
+                Defense {getSortIndicator("defense")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("special")}>
+                Special {getSortIndicator("special")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("speed")}>
+                Speed {getSortIndicator("speed")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("baseTotal")}>
+                Total {getSortIndicator("baseTotal")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("evolutions")}>
+                Evolutions {getSortIndicator("evolutions")}
+              </button>
+            </th>
+            <th>
+              <button onClick={() => onSort("legendary")}>
+                Legendary {getSortIndicator("legendary")}
+              </button>
+            </th>
           </tr>
         </thead>
+
         <tbody>
           {/* Loops over the pokemons array and create a row for each one */}
           {pokemons.map((pokemon) => (
