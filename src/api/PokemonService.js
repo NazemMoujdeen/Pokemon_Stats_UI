@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/pokemon";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/pokemon";
 
 export async function savePokemon(Pokemon) {
   return await axios.post(API_URL, Pokemon);
