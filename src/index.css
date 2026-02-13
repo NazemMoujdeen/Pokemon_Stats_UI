@@ -1,12 +1,96 @@
-/*imports custom font*/
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap");
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Core palette */
+  --red: #e31c1c;
+  --red-dark: #9b0000;
+  --red-glow: rgba(227, 28, 28, 0.35);
+  --gold: #f5c842;
+  --gold-glow: rgba(245, 200, 66, 0.3);
+  --bg-deep: #0a0a0f;
+  --bg-panel: #111118;
+  --bg-card: #16161f;
+  --bg-hover: #1d1d2a;
+  --border: rgba(255, 255, 255, 0.07);
+  --text-main: #e8e8f0;
+  --text-muted: #6b6b88;
+  --text-dim: #3a3a55;
+  --scanline: rgba(0, 0, 0, 0.18);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: lightgrey;
+  font-family: "Rajdhani", system-ui, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-main);
+  background-color: var(--bg-deep);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-deep);
+  min-height: 100vh;
+  /* Subtle scanline overlay */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--scanline) 2px,
+    var(--scanline) 4px
+  );
+  background-attachment: fixed;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-panel);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--red-dark);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--red);
+}
+
+/* Loading / error messages */
+.loading-message,
+.error-message {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  padding: 2rem;
+  text-align: center;
+}
+.loading-message {
+  color: var(--gold);
+  animation: blink 1s step-end infinite;
+}
+.error-message {
+  color: var(--red);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Global link reset */
+a {
+  text-decoration: none;
+  color: inherit;
 }

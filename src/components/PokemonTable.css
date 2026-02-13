@@ -1,13 +1,27 @@
 .table-container {
-  margin-top: 2rem;
   width: 100%;
-  border: 2px solid #333;
-  border-radius: 8px;
-  background-color: #fafafa;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg-card);
   position: relative;
-  max-height: 75vh; /* 75% of the viewport/screen height */
-  overflow-y: auto; /* Allow vertical scrolling within this box */
-  overflow-x: auto; /* Keep horizontal scrolling for small screens */
+  max-height: 72vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  /* Inner top-shadow hint for scroll */
+  box-shadow: inset 0 8px 12px -8px rgba(0, 0, 0, 0.5);
+}
+
+/* Row count indicator */
+.table-container::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--red) 0%,
+    var(--gold) 50%,
+    var(--red) 100%
+  );
 }
 
 table {
@@ -15,40 +29,30 @@ table {
   border-collapse: collapse;
 }
 
-th,
-td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  white-space: nowrap;
-}
-
-/*made so the rows scroll and the table headers dont move for readability*/
+/* Headers */
 thead th {
-  background-color: #333; /*darker grey*/
-  color: white;
-  font-family: "Press Start 2P", system-ui;
-  font-size: 0.75rem;
+  background: #0d0d14;
+  color: var(--text-muted);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  text-align: left;
   position: sticky;
   top: 0;
-  z-index: 1; /* Ensures the header stays above the table body content */
+  z-index: 2;
+  border-bottom: 1px solid rgba(227, 28, 28, 0.3);
+  white-space: nowrap;
+  transition: color 0.15s;
 }
 
-/*every other row is a slightly different shade for readability*/
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+thead th:first-child {
+  border-left: 2px solid var(--red);
+  padding-left: 1.2rem;
 }
 
-tbody tr:hover {
-  background-color: lightgreen; /* highlight row on hover with a green color */
-}
-
-.pokemon-name {
-  font-weight: bold;
-  text-transform: capitalize;
-}
-
-/*styles for the sorting buttons*/
+/* Sort buttons */
 thead th button {
   background: none;
   border: none;
@@ -58,8 +62,173 @@ thead th button {
   padding: 0;
   text-align: left;
   width: 100%;
+  transition: color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+thead th button:hover,
+thead th:hover {
+  color: var(--text-main);
 }
 
 thead th button:hover {
-  color: #ffde00; /* Yellow hover effect */
+  color: var(--gold);
+}
+
+/* Rows */
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+  animation: row-in 0.25s ease both;
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger animation per row */
+tbody tr:nth-child(1) {
+  animation-delay: 0.02s;
+}
+tbody tr:nth-child(2) {
+  animation-delay: 0.04s;
+}
+tbody tr:nth-child(3) {
+  animation-delay: 0.06s;
+}
+tbody tr:nth-child(4) {
+  animation-delay: 0.08s;
+}
+tbody tr:nth-child(5) {
+  animation-delay: 0.1s;
+}
+tbody tr:nth-child(6) {
+  animation-delay: 0.12s;
+}
+tbody tr:nth-child(7) {
+  animation-delay: 0.14s;
+}
+tbody tr:nth-child(8) {
+  animation-delay: 0.16s;
+}
+tbody tr:nth-child(9) {
+  animation-delay: 0.18s;
+}
+tbody tr:nth-child(10) {
+  animation-delay: 0.2s;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.018);
+}
+
+tbody tr:hover {
+  background: var(--bg-hover);
+  border-bottom-color: rgba(227, 28, 28, 0.25);
+}
+
+/* Highlight left edge on hover */
+tbody tr:hover td:first-child {
+  border-left: 2px solid var(--red);
+}
+
+th,
+td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+td {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* Number column */
+td:first-child {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  padding-left: 1.2rem;
+}
+
+/* Name column */
+.pokemon-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.pokemon-name a {
+  color: var(--text-main);
+  transition: color 0.15s;
+  position: relative;
+}
+
+.pokemon-name a::after {
+  content: " →";
+  opacity: 0;
+  font-size: 0.8em;
+  transition: opacity 0.15s, transform 0.15s;
+  display: inline-block;
+  transform: translateX(-4px);
+  color: var(--red);
+}
+
+.pokemon-name a:hover {
+  color: var(--gold);
+}
+
+.pokemon-name a:hover::after {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* Stat cells */
+td:nth-child(5),
+td:nth-child(6),
+td:nth-child(7),
+td:nth-child(8),
+td:nth-child(9) {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.88rem;
+  color: #aabbd8;
+}
+
+/* Total col */
+td:nth-child(10) {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* Legendary col */
+td:last-child {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+/* "No Pokémon found" message */
+p {
+  font-family: "Share Tech Mono", monospace;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 3rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
 }

@@ -1,20 +1,50 @@
 .search-container {
-  margin-bottom: 2rem;
-  width: 100%;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Icon prefix */
+.search-container::before {
+  content: "▶";
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: var(--red);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .search-bar {
   width: 100%;
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-family: "Press Start 2P", system-ui;
-  border-radius: 8px;
-  border: 3px solid #333;
-  box-sizing: border-box; /* Ensures padding doesn't affect the width */
-  background-color: #f0f0f0;
+  padding: 0.85rem 1.2rem 0.85rem 2.4rem;
+  font-size: 1.05rem;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+
+.search-bar::placeholder {
+  color: var(--text-dim);
+  font-weight: 400;
 }
 
 .search-bar:focus {
-  outline: none;
-  border-color: red;
+  border-left-color: var(--gold);
+  border-color: rgba(245, 200, 66, 0.4);
+  background-color: var(--bg-hover);
+  box-shadow: 0 0 0 1px rgba(245, 200, 66, 0.15),
+    0 0 20px rgba(245, 200, 66, 0.08);
+}
+
+.search-bar:focus + .search-container::before {
+  color: var(--gold);
 }

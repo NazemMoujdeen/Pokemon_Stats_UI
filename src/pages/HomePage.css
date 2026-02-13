@@ -1,38 +1,82 @@
 #root {
-  max-width: 1280px;
-  margin: 2rem auto; /* 2rem is two times the font size of the root element*/
-  padding: 5%;
-  text-align: center;
-  background-color: darkred; /* This makes the content area gey */
-  color: black; /* Makes default text black */
-  border-radius: 8px; /* gives the box soft corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 4rem;
+  min-height: 100vh;
 }
 
+/* ── Header ── */
 .header {
-  /*styling to make the red box*/
-  background-color: red;
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 3px solid #333;
-
-  /* flexbox styles to arrange the logos and title so the logos are either side of the title*/
+  position: relative;
   display: flex;
-  justify-content: space-between; /* pushes items apart */
-  align-items: center; /* centers the items */
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--red-dark) 0%,
+    var(--red) 60%,
+    #ff4444 100%
+  );
+  border-radius: 4px 4px 0 0;
+  border-bottom: 3px solid var(--gold);
+  overflow: hidden;
+  box-shadow: 0 0 40px var(--red-glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/*styling for the title text*/
+/* Top-left corner bracket */
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-top: 3px solid var(--gold);
+  border-left: 3px solid var(--gold);
+}
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-bottom: 3px solid var(--gold);
+  border-right: 3px solid var(--gold);
+}
+
 .header h1 {
   font-family: "Press Start 2P", system-ui;
-  color: white;
-  margin: 0;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px #000000;
+  color: #fff;
+  font-size: clamp(0.75rem, 2vw, 1.1rem);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 3px 3px 0 rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.05em;
 }
 
-/* styling for the pokeball pngs */
 .header-logo {
-  width: 60px;
-  height: auto;
+  width: 52px;
+  height: 52px;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Content area ── */
+.content-area {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 2rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
 }
